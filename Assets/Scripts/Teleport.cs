@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Teleport : MonoBehaviour
 {
-    Vector3 targetPosition;
+    public Vector3 targetPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        targetPosition = gameObject.transform.position;
+        //targetPosition = gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -19,25 +19,27 @@ public class Teleport : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T))
         {
 
-            Vector3 deltaPosition = targetPosition - gameObject.transform.position;
+           Vector3 deltaPosition = targetPosition - gameObject.transform.position;
             
            gameObject.GetComponent<CharacterController>().Move(deltaPosition);
+           gameObject.GetComponent<CharacterController>().SimpleMove(Vector3.zero);
 
 
-          //gameObject.SetActive(false);//hack, not reccomended
-          // gameObject.transform.position = Vector3.zero;        
-          //  gameObject.SetActive(true);
+            //gameObject.SetActive(false);//hack, not reccomended
+            // gameObject.transform.position = Vector3.zero;        
+            //  gameObject.SetActive(true);
 
         }
 
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Teleporter"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            Vector3 deltaPosition = targetPosition - gameObject.transform.position;
+            Vector3 deltaPosition = targetPosition - other.transform.position;
 
-            gameObject.GetComponent<CharacterController>().Move(deltaPosition);
+            other.gameObject.GetComponent<CharacterController>().Move(deltaPosition);
+            other.gameObject.GetComponent<CharacterController>().SimpleMove(Vector3.zero);
         }
     }
 }
