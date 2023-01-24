@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Killbox : MonoBehaviour
 {
-    public GameObject checkPoint;
     public Vector3 targetPosition;
+    public GameObject checkPoint;
 
     // Start is called before the first frame update
     void Start()
