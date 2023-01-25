@@ -4,20 +4,33 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public Vector3 targetPosition;
-    public GameObject killbox;
+    public Vector3 spawnPosition;
+    public GameObject checkPoint;
+    public GameObject checkPoint2;
     
 
-    // Update is called once per frame
-    void Update()
+    
+    void Start()
     {
-        
+        spawnPosition = gameObject.transform.position;
     }
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Killbox"))
         {
-            targetPosition = gameObject.transform.position;
+            Vector3 deltaPosition = spawnPosition - transform.position;
+
+            gameObject.GetComponent<CharacterController>().Move(deltaPosition);
+            gameObject.GetComponent<CharacterController>().SimpleMove(Vector3.zero);
         }
+
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            spawnPosition = checkPoint.transform.position;
+            Destroy(checkPoint);
+        }
+
+       
+
     }
 }

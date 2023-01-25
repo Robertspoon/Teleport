@@ -6,6 +6,9 @@ TagManager:
   tags:
   - CinemachineTarget
   - Teleporter
+  - Killbox
+  - Checkpoint
+  - Checkpoint2
   layers:
   - Default
   - TransparentFX
